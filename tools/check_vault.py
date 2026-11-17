@@ -76,7 +76,8 @@ def main():
 
         # Frontmatter checks
         if meta is None:
-            if name not in SKIP_FILES and not rel.startswith("references" + os.sep):
+            top_level_doc = os.path.dirname(rel) == ""
+            if not top_level_doc and name not in SKIP_FILES and not rel.startswith("references" + os.sep):
                 errors.append(f"{rel}: missing frontmatter (start from templates/)")
         else:
             ntype = meta.get("type", "")

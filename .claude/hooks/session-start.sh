@@ -6,7 +6,8 @@ cd "${CLAUDE_PROJECT_DIR:-.}" || exit 0
 git rev-parse --git-dir >/dev/null 2>&1 || exit 0
 
 branch=$(git symbolic-ref --short HEAD 2>/dev/null || echo "(detached)")
-default=main
+# The shared branch work merges into: .claude/trunk if present, else main.
+default=$(tr -d '[:space:]' < .claude/trunk 2>/dev/null); default=${default:-main}
 
 if git remote get-url origin >/dev/null 2>&1; then
   if git fetch --quiet --prune origin 2>/dev/null; then
@@ -21,7 +22,7 @@ if git remote get-url origin >/dev/null 2>&1; then
   fi
 fi
 
-echo "Vault git state:"
+echo "Vault git state (shared branch: $default):"
 echo "- current branch: $branch"
 echo "- uncommitted files: $(git status --porcelain | wc -l | tr -d ' ')"
 if [ "$branch" != "$default" ] && git rev-parse --verify --quiet "origin/$default" >/dev/null; then
@@ -31,6 +32,9 @@ fi
 if [ "$branch" = "$default" ]; then
   echo "- on $default: create a <username>/<topic> branch before the first edit (see CLAUDE.md)."
 fi
-mine=$(git branch --format='%(refname:short)' | grep -v "^$default\$" | head -10 | tr '\n' ' ')
+if [ "$branch" = "main" ] && [ "$default" != "main" ]; then
+  echo "- WARNING: on main, but this checkout's shared branch is $default. Switch to $default before working."
+fi
+mine=$(git branch --format='%(refname:short)' | grep -vE "^($default|main)\$" | head -10 | tr '\n' ' ')
 [ -n "$mine" ] && echo "- local work branches: $mine"
 exit 0

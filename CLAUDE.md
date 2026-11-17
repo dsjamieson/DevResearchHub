@@ -51,20 +51,22 @@ A `superseded` result also needs `superseded_by`. `code` and `data` may be `n/a`
 
 ## Git workflow (you do this automatically)
 
+**Shared branch.** Work merges into the branch named in `.claude/trunk`, or `main` if that file is missing. In this checkout it is **`demo`**: the pilot runs there, and `main` holds the clean prototype. Never commit to, push to, merge into, or open PRs against `main` from a demo checkout. "The shared branch" below means this branch.
+
 Hooks in `.claude/settings.json` already:
 - pull the latest changes when a session starts (and tell you the state),
-- autosave-commit after each of your turns **on non-main branches only**,
-- push the current branch when the session ends.
+- autosave-commit after each of your turns, **on work branches only** (never on `main` or the shared branch),
+- push the current work branch when the session ends.
 
 Your job on top of that:
 
-1. **Before the first edit in a session**, if you're on `main`, create a branch named `<github-username>/<short-topic>` (e.g. `dsjamieson/oscillator-check`). Get the username with `gh api user -q .login`. If the user already has an unmerged branch for the same topic, continue on that one instead.
+1. **Before the first edit in a session**, if you're on the shared branch or `main`, create a branch named `<github-username>/<short-topic>` (e.g. `dsjamieson/oscillator-check`). Get the username with `gh api user -q .login`. If the user already has an unmerged branch for the same topic, continue on that one instead.
 2. **Commit at logical checkpoints** with a clear message describing the research change ("Add second-order correction to pendulum period"), not "update files". The autosave hook is a safety net, not a substitute.
 3. **When the user says the work is done** (or asks to share/sync), use the `sync` skill: run the validator, push, and open a pull request.
    - **Merge it yourself** (`gh pr merge --squash --delete-branch`) only if every changed file is in the user's own `logs/<username>/`, or in a project they own (`owner:` in its `index.md`), **and** no result changed to `validated`.
    - Otherwise leave the PR open for the CODEOWNER and tell the user who will review it.
 4. **Merge conflicts:** never resolve conflicts in someone else's notes silently. Show the user both versions in plain language and ask which to keep.
-5. **Never** force-push, push directly to `main`, rewrite published history, or run `git reset --hard`. These are also blocked in settings and by branch protection.
+5. **Never** force-push, push directly to `main` or the shared branch, rewrite published history, or run `git reset --hard`. These are also blocked in settings and by branch protection.
 
 ## Skills in this repo
 

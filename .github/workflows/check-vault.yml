@@ -3,7 +3,7 @@ name: Check vault
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, demo]
 
 jobs:
   check:

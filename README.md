@@ -2,7 +2,7 @@
 
 A shared, version-controlled research notebook for physics collaborations: derivations, results with provenance, meeting minutes, and personal logs in Markdown, with Claude handling all of the git.
 
-**Prototype.** The conventions and tooling are being tried out; expect changes.
+**Prototype.** The conventions and tooling are being tried out; expect changes. **Trying it with the group? Start with [PILOT.md](PILOT.md).**
 
 ## How it works
 

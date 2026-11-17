@@ -26,6 +26,10 @@
       "Bash(git push --force-with-lease *)",
       "Bash(git push origin main *)",
       "Bash(git push origin HEAD:main *)",
+      "Bash(git push origin demo *)",
+      "Bash(git push origin HEAD:demo *)",
+      "Bash(git push -u origin main *)",
+      "Bash(git push -u origin demo *)",
       "Bash(git reset --hard *)",
       "Bash(git clean -f *)",
       "Bash(git branch -D *)"

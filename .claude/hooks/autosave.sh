@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 # Stop hook: after each Claude turn, snapshot all changes (the user's and
-# Claude's) on the current work branch. Never commits on main. Local only;
+# Claude's) on the current work branch. Never commits on main or the shared branch. Local only;
 # pushing happens at session end or through the sync skill.
 set -u
 cd "${CLAUDE_PROJECT_DIR:-.}" || exit 0
 git rev-parse --git-dir >/dev/null 2>&1 || exit 0
 
 branch=$(git symbolic-ref --short HEAD 2>/dev/null) || exit 0
-[ "$branch" = "main" ] && exit 0
+trunk=$(tr -d '[:space:]' < .claude/trunk 2>/dev/null); trunk=${trunk:-main}
+[ "$branch" = "main" ] || [ "$branch" = "$trunk" ] && exit 0
 [ -z "$(git status --porcelain)" ] && exit 0
 # Don't interfere with an in-progress merge or rebase.
 gd=$(git rev-parse --git-dir)
