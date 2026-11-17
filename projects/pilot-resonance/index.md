@@ -23,7 +23,7 @@ analytically and numerically, for $\omega_0 = 1$ and $\gamma = 0.1$, and confirm
 
 ## Current status
 
-Not started.
+Analytic derivation drafted; numerical check not yet done.
 
 ## Key results
 
@@ -31,6 +31,8 @@ Not started.
 |---|---|
 
 ## Derivations
+
+- [Driving frequency that maximizes the steady-state amplitude](derivations/resonance-frequency.md) (draft)
 
 ## Open tasks
 
