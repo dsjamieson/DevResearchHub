@@ -1,0 +1,8 @@
+# Reviewers requested automatically on pull requests.
+# Later lines take precedence. Add one line per project owner.
+
+*                          @dsjamieson
+/projects/example-pendulum/ @dsjamieson
+
+# Each person owns their own log folder:
+/logs/dsjamieson/          @dsjamieson

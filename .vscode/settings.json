@@ -1,0 +1,11 @@
+{
+  "markdown.math.enabled": true,
+  "markdown.validate.enabled": true,
+  "markdown.updateLinksOnFileMove.enabled": "prompt",
+  "files.exclude": {
+    "**/.git": true
+  },
+  "git.autofetch": false,
+  "git.enableSmartCommit": false,
+  "foam.edit.linkReferenceDefinitions": "off"
+}

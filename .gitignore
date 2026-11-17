@@ -1,0 +1,35 @@
+# OS / editor
+.DS_Store
+.obsidian/workspace*.json
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Personal Claude settings
+.claude/settings.local.json
+
+# Data and large outputs belong outside the vault
+*.h5
+*.hdf5
+*.npy
+*.npz
+*.fits
+*.root
+*.parquet
+*.pkl
+data/
+output/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+
+# Python
+__pycache__/
+.ipynb_checkpoints/
